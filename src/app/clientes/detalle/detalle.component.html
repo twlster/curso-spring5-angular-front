@@ -1,0 +1,42 @@
+<div *ngIf="modalService.modal" class="open-modal animation fadeIn">
+  <div class="modal" tabindex="-1" style="display:block;">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{titulo}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm">
+                <ul class="list-group text-dark mb-3" *ngIf="cliente">
+                  <li class="list-group-item">{{cliente.name}}</li>
+                  <li class="list-group-item">{{cliente.lastName}}</li>
+                  <li class="list-group-item">{{cliente.email}}</li>
+                  <li class="list-group-item">{{cliente.birthDate | date:"fullDate"}}</li>
+                  <li class="list-group-item">{{cliente.region.name}}</li>
+                </ul>
+                <div class="input-group mb-3" *ngIf="authService.hasRole('ROLE_ADMIN')">
+                  <input #fileElement (change)="selectPicture($event)" type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                  <button (click)="uploadPicture()" [disabled]="!selectedPicture" class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Upload picture</button>
+                </div>
+                <div class="progress" *ngIf="progress > 0" style="height:40px;">
+                  <div class="progress-bar" role="progressbar" [ngStyle]="{width:progress+'%'}" attr.aria-valuenow="{{progress}}" attr.aria-valuemin="0" aria-valuemax="100">
+                    {{progress}}%
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm">
+                <img src="http://localhost:8080/api/clients/upload/img/{{cliente.picture}}" alt="{{cliente.picture}}" *ngIf="cliente?.picture" class="img-thumbnail rounded">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
