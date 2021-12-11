@@ -31,6 +31,33 @@
                 <img src="http://localhost:8080/api/clients/upload/img/{{cliente.picture}}" alt="{{cliente.picture}}" *ngIf="cliente?.picture" class="img-thumbnail rounded">
               </div>
             </div>
+            <div class="row">
+              <div class="alert alert-info my-4" *ngIf="cliente.bills.length <= 0">
+                No Bills associated to the client {{cliente.name}} {{cliente.lastName}} at the moment.
+              </div>
+              <table class="table table-bordered table-striped my-4" *ngIf="cliente.bills.length > 0">
+                <thead>
+                  <tr>
+                    <th>No.</th>
+                    <th>Description</th>
+                    <th>Date</th>
+                    <th>Total</th>
+                    <th>Details</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let bill of cliente.bills">
+                    <td>{{bill.id}}</td>
+                    <td>{{bill.description}}</td>
+                    <td>{{bill.createdAt}}</td>
+                    <td>{{bill.total}}</td>
+                    <td>
+                      <button class="btn btn-primary btn-sm" type="button" [routerLink]="['/bills', bill.id]">See</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
         <div class="modal-footer">
