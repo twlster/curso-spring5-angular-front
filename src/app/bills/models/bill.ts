@@ -10,4 +10,8 @@ export class Bill {
       client: Cliente;
       total: number;
       createdAt: string;
+
+      public calculateTotal(): number{
+        return this.items.reduce((sum, current) => sum + current.calculateValue(), 0);
+      }
 }

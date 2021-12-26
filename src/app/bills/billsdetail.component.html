@@ -1,1 +1,61 @@
-<p>billsdetail works!</p>
+<div class="card bg-light" *ngIf="bill">
+  <div class="card-header">
+  <h4 style="font-weight:bold">{{tittle}}: {{bill.description}}</h4>
+  </div>
+  <div class="card-body">
+    <h4 class="card-tittle">
+      <button [routerLink]="['/clientes']" class="btn btn-primary btn-sm" type="button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"></path>
+        </svg>
+        Back
+      </button>
+    </h4>
+    <div class="card-deck ">
+      <div class="card">
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-primary">Client's data</li>
+            <li class="list-group-item"><span style="font-weight:bold">Full Name:</span> {{bill.client.name}} {{bill.client.lastName}}</li>
+            <li class="list-group-item"><span style="font-weight:bold">Email:</span> {{bill.client.email}} </li>
+            <li class="list-group-item"><span style="font-weight:bold">Region:</span> {{bill.client.region.name}} </li>
+        </ul>
+      </div>
+      <div class="card">
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-primary"> Bill's data</li>
+          <li class="list-group-item"><span style="font-weight:bold">Number:</span> {{bill.id}}</li>
+          <li class="list-group-item"><span style="font-weight:bold">Description:</span> {{bill.description}}</li>
+          <li class="list-group-item"><span style="font-weight:bold">Created At:</span> {{bill.createdAt}}</li>
+        </ul>
+      </div>
+    </div>
+    <table class="table table-bordered table-striped my-4" *ngIf="bill.items.length > 0">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of bill.items">
+          <td>{{item.product.name}}</td>
+          <td>{{item.quantity}}</td>
+          <td>{{item.product.price}}</td>
+          <td>{{item.value}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <h5 class="float-right">Grand Total: <span class="badge badge-dark">{{bill.total}}</span></h5>
+    <div class="card border-dark mb-4" style="max-width: 250px">
+      <div class="card-header">
+        Observations
+      </div>
+      <div class="card card-body">
+        <p *ngIf="!bill.observations">No Observations</p>
+        <p *ngIf="bill.observations">{{bill.observations}}</p>
+      </div>
+    </div>
+  </div>
+</div>

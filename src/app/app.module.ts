@@ -11,9 +11,10 @@ import { PaginatorComponent } from './paginator/paginator.component';
 import { DetalleComponent } from './clientes/detalle/detalle.component';
 import { ClientService } from './clientes/client.service';
 import { RegionService } from './clientes/region.service';
+import { BillService } from './bills/services/bill.service';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {registerLocaleData} from '@angular/common';
 
 import localeES from '@angular/common/locales/es';
@@ -21,6 +22,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDatepickerModule} from '@angular/material';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
 import { LoginComponent } from './users/login.component';
 
 import {AuthGuard} from './users/guards/auth.guard';
@@ -29,6 +33,7 @@ import {RoleGuard} from './users/guards/role.guard';
 import {TokenInterceptor} from './users/interceptors/token.interceptor';
 import {AuthInterceptor} from './users/interceptors/auth.interceptor';
 import { BillsdetailComponent } from './bills/billsdetail.component';
+import { BillsComponent } from './bills/bills.component';
 
 registerLocaleData(localeES, 'es');
 
@@ -40,7 +45,8 @@ const routes: Routes = [
   {path: 'clientes/form', component: FormComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
   {path: 'clientes/form/:id', component: FormComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
   {path: 'login', component: LoginComponent},
-  {path: 'bills/:id', component: BillsdetailComponent}
+  {path: 'bills/:id', component: BillsdetailComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_USER'}},
+  {path: 'bills/form/:clientId', component: BillsComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}}
 ];
 
 @NgModule({
@@ -54,7 +60,8 @@ const routes: Routes = [
     PaginatorComponent,
     DetalleComponent,
     LoginComponent,
-    BillsdetailComponent
+    BillsdetailComponent,
+    BillsComponent
   ],
   imports: [
     BrowserModule,
@@ -63,9 +70,13 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     MatDatepickerModule,
-    MatMomentDateModule
+    MatMomentDateModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatFormFieldModule
   ],
-  providers: [ClientService,
+  providers: [ClientService, BillService,
     {provide: LOCALE_ID, useValue: 'es'},
     {provide: MAT_DATE_LOCALE, useValue: 'es'},
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},

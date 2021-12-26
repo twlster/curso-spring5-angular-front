@@ -6,6 +6,8 @@ import {Router} from '@angular/router';
 import swal from 'sweetalert2';
 import {HttpEventType} from '@angular/common/http';
 import {AuthService} from '../../users/auth.service';
+import {BillService} from '../../bills/services/bill.service';
+import {Bill} from '../../bills/models/bill';
 
 
 @Component({
@@ -29,7 +31,7 @@ export class DetalleComponent implements OnInit{
 
   constructor(private clientService: ClientService,
     private router: Router,  private modalService: ModalService,
-    private authService: AuthService) { }
+    private authService: AuthService, private billService: BillService) { }
 
   selectPicture(event) {
     this.progress = 0;
@@ -61,6 +63,28 @@ export class DetalleComponent implements OnInit{
       })
     }
   }
+
+  deleteBill(bill: Bill): void {
+      swal.fire({
+        title: 'Are you sure?',
+        text: `Do you want to delete the bill ${bill.description}?`,
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        cancelButtonText:'No',
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.billService.delete(bill.id).subscribe(() => {
+             this.cliente.bills = this.cliente.bills.filter(bil => bil !== bill);
+             swal.fire('Bill deleted', `Bill was deleted successfully!`, 'success')
+           })
+        } else {
+           swal.fire('Bill not deleted', `The bill has not been reased!`, 'info')
+        }
+      })
+    }
 
   closeModal(){
     this.modalService.close();

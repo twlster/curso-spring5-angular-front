@@ -47,6 +47,7 @@ export class FormComponent implements OnInit {
   public update(client: Cliente): void {
     console.log("Clicked!")
     console.log(this.cliente)
+    this.cliente.bills = null;
     this.clientService.update(this.cliente).subscribe(cliente => {
        this.router.navigate(['/clientes'])
           swal.fire('Cliente Actualizado', `Cliente ${cliente.name} actualizado con exito!`, 'success')
