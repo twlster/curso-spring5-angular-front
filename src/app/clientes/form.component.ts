@@ -12,10 +12,10 @@ import swal from 'sweetalert2';
 })
 export class FormComponent implements OnInit {
 
-  private cliente: Cliente = new Cliente()
-  private titulo:string = "Crear Cliente"
-  private errors: string[];
-  private regions: Region[];
+  public cliente: Cliente = new Cliente()
+  public titulo:string = "Crear Cliente"
+  public errors: string[];
+  public regions: Region[];
 
   constructor(private clientService: ClientService, private regionService: RegionService, private router: Router, private activatedRoute: ActivatedRoute) { }
 

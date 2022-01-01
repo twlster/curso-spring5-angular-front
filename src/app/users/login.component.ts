@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   tittle:string = "Please Sing In!";
   user: User;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(public authService: AuthService, private router: Router) {
     this.user = new User();
   }
 

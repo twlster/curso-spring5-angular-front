@@ -19,7 +19,7 @@ export class DetalleComponent implements OnInit{
 
   @Input() cliente: Cliente;
   titulo: string = "Clients Details";
-  private selectedPicture: File;
+  public selectedPicture: File;
   progress: number = 0;
 
   @ViewChild("fileElement", {static: false})
@@ -30,8 +30,8 @@ export class DetalleComponent implements OnInit{
   }
 
   constructor(private clientService: ClientService,
-    private router: Router,  private modalService: ModalService,
-    private authService: AuthService, private billService: BillService) { }
+    private router: Router,  public modalService: ModalService,
+    public authService: AuthService, private billService: BillService) { }
 
   selectPicture(event) {
     this.progress = 0;

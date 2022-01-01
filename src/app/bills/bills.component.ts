@@ -20,7 +20,7 @@ export class BillsComponent implements OnInit {
 
   title: string = "New Bill";
   bill: Bill = new Bill();
-  private errors: string[];
+  public errors: string[];
 
   productAutoComplete = new FormControl();
   products: Product[];
@@ -102,9 +102,9 @@ export class BillsComponent implements OnInit {
     }
 
     if(billForm.form.valid && this.bill.items.length > 0){
-      this.billService.create(this.bill).subscribe(cliente => {
-         this.router.navigate(['/clientes'])
-            swal.fire('Bill Created', `Bill ${this.bill.description} was successfily created!`, 'success')
+      this.billService.create(this.bill).subscribe(bill => {
+         this.router.navigate(['/bills', bill.id]);
+         swal.fire('Bill Created', `Bill ${bill.description} was successfily created!`, 'success');
        },
        err => {
          this.errors = err.error.errors as string[];
@@ -116,8 +116,8 @@ export class BillsComponent implements OnInit {
 
   public update(bill: Bill): void {
     this.billService.update(this.bill).subscribe(bill => {
-       this.router.navigate(['/clientes'])
-         swal.fire('Bill Updated', `Bill ${this.bill.description} was successfily updated!`, 'success')
+       this.router.navigate(['/bills', bill.id]);
+       swal.fire('Bill Updated', `Bill ${this.bill.description} was successfily updated!`, 'success');
      },
      err => {
        this.errors = err.error.errors as string[];

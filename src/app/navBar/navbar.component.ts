@@ -12,7 +12,7 @@ export class NavBarComponent {
 
   tittle: string = 'App Angular';
 
-  constructor(private authService: AuthService, private router: Router){}
+  constructor(public authService: AuthService, private router: Router){}
 
   logout():void{
     this.authService.logout();

@@ -16,7 +16,7 @@ export class RegionService {
 
   // private httpHeader = new HttpHeaders({'Content-Type':'application/json'})
 
-  constructor(private http: HttpClient, private router: Router, private authService: AuthService) { }
+  constructor(private http: HttpClient, private router: Router, public authService: AuthService) { }
 
   // private addAuthorizationHeader(){
   //   let token = this.authService.token;

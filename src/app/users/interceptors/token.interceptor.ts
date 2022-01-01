@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
 
-  constructor(private authService: AuthService){}
+  constructor(public authService: AuthService){}
 
   intercept(req: HttpRequest<any>, next: HttpHandler):
     Observable<HttpEvent<any>> {

@@ -9,7 +9,7 @@ import swal from 'sweetalert2';
 })
 export class RoleGuard implements CanActivate {
 
-  constructor(private authService: AuthService, private router: Router){}
+  constructor(public authService: AuthService, private router: Router){}
 
   canActivate(
     next: ActivatedRouteSnapshot,
