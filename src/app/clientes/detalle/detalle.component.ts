@@ -9,6 +9,7 @@ import {AuthService} from '../../users/auth.service';
 import {BillService} from '../../bills/services/bill.service';
 import {Bill} from '../../bills/models/bill';
 
+import {URL_BACKEND} from '../../config/config';
 
 @Component({
   selector: 'detalle-cliente',
@@ -21,6 +22,8 @@ export class DetalleComponent implements OnInit{
   titulo: string = "Clients Details";
   public selectedPicture: File;
   progress: number = 0;
+
+  public urlBackend: string = URL_BACKEND;
 
   @ViewChild("fileElement", {static: false})
   fileElement: ElementRef;

@@ -7,12 +7,14 @@ import { HttpClient, HttpHeaders, HttpRequest, HttpEvent } from '@angular/common
 import {map, catchError} from 'rxjs/operators';
 import {Router} from '@angular/router';
 
+import {URL_BACKEND} from '../../config/config';
+
 @Injectable({
   providedIn: 'root'
 })
 export class BillService {
 
-  private urlEndpoint: string = 'http://localhost:8080/api/bills';
+  private urlEndpoint: string = URL_BACKEND+'/api/bills';
 
   constructor(private http: HttpClient, private router: Router) { }
 

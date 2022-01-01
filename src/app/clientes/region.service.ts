@@ -7,12 +7,14 @@ import {Router} from '@angular/router';
 import {AuthService} from '../users/auth.service';
 import swal from 'sweetalert2';
 
+import {URL_BACKEND} from '../config/config';
+
 @Injectable({
   providedIn: 'root'
 })
 export class RegionService {
 
-  private urlEndpoint:string = 'http://localhost:8080/api/clients/regions';
+  private urlEndpoint:string = URL_BACKEND+'/api/clients/regions';
 
   // private httpHeader = new HttpHeaders({'Content-Type':'application/json'})
 

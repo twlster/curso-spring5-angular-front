@@ -6,6 +6,8 @@ import {Router, ActivatedRoute} from '@angular/router';
 import swal from 'sweetalert2';
 import {AuthService} from '../users/auth.service';
 
+import {URL_BACKEND} from '../config/config';
+
 @Component({
   selector: 'app-clientes',
   templateUrl: './clientes.component.html',
@@ -17,6 +19,8 @@ export class ClientesComponent implements OnInit {
   available: boolean = false;
   paginador: any;
   selectedClient: Cliente;
+
+  public urlBackend: string = URL_BACKEND;
 
   constructor(private clientService: ClientService, private router: Router, private activatedRoute: ActivatedRoute, public modalService: ModalService,
   public authService: AuthService) { }

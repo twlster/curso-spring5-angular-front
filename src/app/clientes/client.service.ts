@@ -7,12 +7,14 @@ import {map, catchError} from 'rxjs/operators';
 import {Router} from '@angular/router';
 // import {AuthService} from '../users/auth.service';
 
+import {URL_BACKEND} from '../config/config';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ClientService {
 
-  private urlEndpoint:string = 'http://localhost:8080/api/clients';
+  private urlEndpoint:string = URL_BACKEND+'api/clients';
 
   // private httpHeader = new HttpHeaders({'Content-Type':'application/json'})
 
